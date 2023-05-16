@@ -2,7 +2,22 @@ import { useState } from 'react';
 import styles from './App.module.css';
 
 function App() {
-	const arrNumbers = Array.from({ length: 10 }, (_, i) => i);
+	const arrSymbols = [
+		{ label: '1', onClick: () => addNumber('1') },
+		{ label: '2', onClick: () => addNumber('2') },
+		{ label: '3', onClick: () => addNumber('3') },
+		{ label: '4', onClick: () => addNumber('4') },
+		{ label: '5', onClick: () => addNumber('5') },
+		{ label: '6', onClick: () => addNumber('6') },
+		{ label: '7', onClick: () => addNumber('7') },
+		{ label: '8', onClick: () => addNumber('8') },
+		{ label: '9', onClick: () => addNumber('9') },
+		{ label: '0', onClick: () => addNumber('0') },
+		{ label: '+', onClick: () => sum() },
+		{ label: '-', onClick: () => sub() },
+		{ label: '=', onClick: () => calculateString(value) },
+		{ label: 'C', onClick: () => clear() },
+	];
 
 	const [value, setValue] = useState('0');
 	const [newOperation, setNewOperation] = useState(false);
@@ -60,23 +75,13 @@ function App() {
 				{value}
 			</div>
 			<div className={styles.container}>
-				{arrNumbers.map((item) => {
+				{arrSymbols.map((obj) => {
 					return (
-						<button onClick={() => addNumber(item)} key={item}>
-							{item}
+						<button onClick={obj.onClick} key={obj.label}>
+							{obj.label}
 						</button>
 					);
 				})}
-				<button onClick={sum}>+</button>
-				<button onClick={sub}>-</button>
-				<button
-					onClick={() => {
-						calculateString(value);
-					}}
-				>
-					=
-				</button>
-				<button onClick={clear}>C</button>
 			</div>
 		</>
 	);
